@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { COOKIE_NAME } from "../../../../../constants";
+import { COOKIE_NAME } from "../../../../../../constants";
 import { NextResponse } from "next/server";
 import { verify } from "jsonwebtoken";
 

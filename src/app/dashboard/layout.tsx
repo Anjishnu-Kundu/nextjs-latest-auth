@@ -1,6 +1,7 @@
 "use client"
 
 import axios, { AxiosError } from "axios";
+import axiosInstance from "../../../axiosInstance";
 import React, { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 
@@ -42,7 +43,7 @@ export default function DashboardLayout({
 
 async function getUser(): Promise<UserResponse> {
     try {
-        const { data } = await axios.get("/api/auth/me")
+        const { data } = await axiosInstance.get("/api/auth/me")
 
         return {
             user: data,
