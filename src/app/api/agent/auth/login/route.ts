@@ -53,18 +53,18 @@ import { sign } from "jsonwebtoken"
 import { serialize } from "cookie";
 import { COOKIE_NAME } from "../../../../../../constants";
 
-const MAX_AGE = 60*60*24*30;
+const MAX_AGE = 60 * 60 * 24 * 30;
 
 export async function POST(request: Request) {
     const body = await request.json()
 
     const { email, password } = body
 
-    if(email !== 'rabiul.shaha@indware.com' || password !== 'Ali@123') {
+    if (email !== 'rabiul.shaha@indware.com' || password !== 'Ali@123') {
         return NextResponse.json(
             {
                 message: "Unauthorized",
-            }, 
+            },
             {
                 status: 401,
             }
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
 
     const token = sign(
         {
-        email,
+            email,
         },
         secret,
         {

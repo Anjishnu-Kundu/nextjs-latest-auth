@@ -106,10 +106,16 @@ export default function Home() {
       password: event.currentTarget.password.value,
     };
 
+    console.log(payload);
+
     try {
-      const { data } = await axiosInstance.post("/api/agent/auth/login", payload)
-      alert(JSON.stringify(data))
-      router.push("/dashboard")
+      const { data } = await axiosInstance.post("/api/agent/auth/login", payload);
+      if (data.message === 'Authenticated!') {
+        alert('Login successful!');
+        window.location.href = "/dashboard"; // Redirect to dashboard
+      } else {
+        alert('Authentication failed');
+      }
     } catch (e) {
       const error = e as AxiosError
       alert(error.message)
@@ -117,29 +123,31 @@ export default function Home() {
   }
   return (
     <div className="login-container">
-        <h2 className='font-bold text-xl'>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="text"
-              name="email"
-              id="email"
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              required
-            />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-        <style jsx>{`
+      <h2 className='font-bold text-xl'>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="text"
+            name="email"
+            value={"rabiul.shaha@indware.com"}
+            id="email"
+            required
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={"Ali@123"}
+            required
+          />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <style jsx>{`
         .login-container {
           max-width: 400px;
           margin: 0 auto;
@@ -179,6 +187,6 @@ export default function Home() {
           background-color: #005bb5;
         }
       `}</style>
-      </div>
+    </div>
   );
 }
